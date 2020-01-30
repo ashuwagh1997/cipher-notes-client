@@ -1,0 +1,61 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Cipher Notes</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+
+            <div class="navbar-form navbar-left">
+                <!-- <div class="form-group">
+                    <input type="text" class="form-control" [(ngModel)]="username"  placeholder="username">
+                </div>
+                <button class="btn btn-default"  style="margin-left: 10px;" (click)="getNotes(username)">Get Notes</button> -->
+                <button class="btn btn-default"  style="margin-left: 10px;" (click)="createNewNote()">New Note</button>
+            </div>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a [routerLink]="['/login']">Logout</a></li>
+              </ul>
+
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div class="container">
+<div class="row">
+    <div class="col-md-4">
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let note of notes" (click)="setEditor(note)">{{note.title}}
+               
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-8" *ngIf="selectedNote">
+        <input type="text" class="form-control" [(ngModel)]="selectedNote.title">
+        <textarea class="mt-4 form-control"  style="min-height: 200px;" [(ngModel)]="selectedNote.desc"></textarea>
+        <input type="password" [(ngModel)]="ckey"  class="mt-4 form-control">
+        <button class="mt-4 btn btn-info"  (click)="cryptNote(ckey)">Crypt</button>
+        <button class="mt-4 btn btn-primary"  style="margin-left: 10px;" (click)="updateNote()">Update</button>
+        <button style="margin-left: 10px;" class="mt-4 btn btn-danger" (click)="deleteNote()">Delete</button>
+    </div>
+    <div class="col-md-8" *ngIf="newNote">
+        <h2>New Note</h2>
+        <input type="text" class="form-control" [(ngModel)]="noteOne.title">
+        <textarea class="mt-4 form-control"  style="min-height: 200px;" [(ngModel)]="noteOne.desc"></textarea>
+        <input type="password" [(ngModel)]="dkey"  class="mt-4 form-control">
+        <button class="mt-4 btn btn-info"  (click)="cryptNewNote(dkey)">Crypt</button>
+        <button class="mt-4 btn btn-primary" (click)="saveNoteOne()">Save</button>
+    </div>
+    
+</div>
+</div>
